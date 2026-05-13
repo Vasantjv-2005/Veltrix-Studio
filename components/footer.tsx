@@ -44,11 +44,15 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-extrabold text-sm">V</span>
+              <div className="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center shadow-lg shadow-orange-500/20">
+                <img 
+                  src="/vetrix.png" 
+                  alt="Vetrix Studio Logo" 
+                  className="w-full h-full object-cover"
+                />
               </div>
               <span className="text-xl font-extrabold bg-gradient-to-r from-orange-400 to-orange-500 bg-clip-text text-transparent">
-                Veltrix Studio
+                Vetrix Studio
               </span>
             </div>
             <p className="text-gray-500 text-sm leading-relaxed mb-6 max-w-xs">
@@ -63,10 +67,10 @@ export default function Footer() {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileHover={{ scale: 1.15, y: -4 }}
                     whileTap={{ scale: 0.95 }}
                     aria-label={s.label}
-                    className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:border-orange-500/30 hover:bg-orange-500/10 transition-all"
+                    className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-orange-400 hover:border-orange-500/40 hover:bg-orange-500/15 transition-all duration-300 hover-lift"
                   >
                     <Icon size={16} />
                   </motion.a>

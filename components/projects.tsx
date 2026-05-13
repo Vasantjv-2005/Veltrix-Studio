@@ -62,7 +62,8 @@ export default function Projects() {
       id="projects"
       className="min-h-screen flex items-center py-24 relative overflow-hidden"
     >
-      <div className="absolute right-0 bottom-1/4 w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute right-0 bottom-1/4 w-[500px] h-[500px] bg-gradient-to-tl from-orange-500/8 to-orange-500/0 rounded-full blur-[120px] pointer-events-none animate-pulse-glow" />
+      <div className="absolute left-0 top-1/3 w-[300px] h-[300px] bg-orange-600/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <motion.div
@@ -84,7 +85,7 @@ export default function Projects() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
-          className="group relative glass-effect rounded-3xl border border-white/10 hover:border-orange-500/40 overflow-hidden mb-6 transition-all duration-300"
+          className="group relative glass-effect-enhanced rounded-3xl border border-orange-500/30 hover:border-orange-500/60 overflow-hidden mb-6 transition-all duration-300 hover-lift shadow-2xl shadow-orange-500/10"
         >
           <div className="grid md:grid-cols-5 gap-0 min-h-[360px]">
             {/* Image — takes 3 cols */}

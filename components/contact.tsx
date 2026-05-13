@@ -38,7 +38,8 @@ export default function Contact() {
       id="contact"
       className="min-h-screen flex items-center py-24 relative overflow-hidden"
     >
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-orange-500/8 to-orange-600/5 rounded-full blur-[150px] pointer-events-none animate-pulse-glow" />
+      <div className="absolute right-0 top-0 w-[300px] h-[300px] bg-orange-500/5 rounded-full blur-[80px] pointer-events-none animate-float" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <motion.div
@@ -63,7 +64,7 @@ export default function Contact() {
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
             onSubmit={handleSubmit}
-            className="lg:col-span-3 glass-effect p-8 rounded-2xl border border-white/10 space-y-5"
+            className="lg:col-span-3 glass-effect-enhanced p-8 rounded-2xl border border-orange-500/20 space-y-5 hover-lift"
           >
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
@@ -143,11 +144,11 @@ export default function Contact() {
             className="lg:col-span-2 space-y-5"
           >
             {/* Direct contact */}
-            <div className="glass-effect p-6 rounded-2xl border border-white/10 space-y-4">
+            <div className="glass-effect-enhanced p-6 rounded-2xl border border-orange-500/20 space-y-4">
               <h3 className="text-white font-bold text-base">Direct Contact</h3>
               <a
                 href="mailto:vasantjv2005@gmail.com"
-                className="flex items-center gap-3 text-gray-400 hover:text-orange-400 transition-colors group"
+                className="flex items-center gap-3 text-gray-400 hover:text-orange-400 transition-colors group hover-lift"
               >
                 <div className="w-9 h-9 rounded-lg bg-orange-500/10 border border-orange-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-500/20 transition-colors">
                   <Mail size={16} className="text-orange-400" />
@@ -163,7 +164,7 @@ export default function Contact() {
             </div>
 
             {/* Social */}
-            <div className="glass-effect p-6 rounded-2xl border border-white/10">
+            <div className="glass-effect-enhanced p-6 rounded-2xl border border-orange-500/20">
               <h3 className="text-white font-bold text-base mb-4">Find Me Online</h3>
               <div className="grid grid-cols-2 gap-3">
                 {socialLinks.map((link) => {
@@ -174,9 +175,9 @@ export default function Contact() {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{ scale: 1.04 }}
+                      whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.97 }}
-                      className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-white/5 border border-white/10 text-gray-400 transition-all duration-200 text-sm ${link.color}`}
+                      className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-white/5 border border-white/10 text-gray-400 transition-all duration-200 text-sm hover-lift ${link.color}`}
                     >
                       <Icon size={16} />
                       {link.label}
@@ -187,9 +188,9 @@ export default function Contact() {
             </div>
 
             {/* Availability */}
-            <div className="glass-effect p-6 rounded-2xl border border-green-500/20 bg-green-500/5">
+            <div className="glass-effect-enhanced p-6 rounded-2xl border border-green-500/30 bg-gradient-to-br from-green-500/10 to-green-500/5 hover-lift">
               <div className="flex items-center gap-2.5 mb-2">
-                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse-glow" />
                 <span className="text-white font-semibold text-sm">Available for Projects</span>
               </div>
               <p className="text-gray-500 text-xs leading-relaxed mb-4">

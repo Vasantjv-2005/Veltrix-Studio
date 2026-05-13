@@ -26,7 +26,8 @@ export default function About() {
       className="min-h-screen flex items-center py-24 relative overflow-hidden"
     >
       {/* Subtle bg accent */}
-      <div className="absolute right-0 top-1/4 w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute right-0 top-1/4 w-[500px] h-[500px] bg-gradient-to-tl from-orange-500/8 to-orange-500/0 rounded-full blur-[120px] pointer-events-none animate-pulse-glow" />
+      <div className="absolute left-0 bottom-0 w-[300px] h-[300px] bg-orange-600/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Section label */}
@@ -73,14 +74,14 @@ export default function About() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
                     viewport={{ once: true }}
-                    whileHover={{ y: -4, borderColor: 'rgba(255,140,66,0.5)' }}
-                    className="glass-effect p-5 rounded-xl border border-white/10 transition-all duration-300 group"
+                    whileHover={{ y: -6, scale: 1.02 }}
+                    className="glass-effect-enhanced p-5 rounded-xl border border-orange-500/20 hover:border-orange-500/50 transition-all duration-300 group hover-lift"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-orange-500/15 flex items-center justify-center mb-3 group-hover:bg-orange-500/25 transition-colors">
+                    <div className="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center mb-3 group-hover:bg-orange-500/30 group-hover:scale-110 transition-all duration-300 shadow-lg shadow-orange-500/10">
                       <Icon size={20} className="text-orange-400" />
                     </div>
-                    <div className="text-white font-semibold text-sm mb-1">{h.title}</div>
-                    <div className="text-gray-500 text-xs">{h.desc}</div>
+                    <div className="text-white font-semibold text-sm mb-1 group-hover:text-orange-100 transition-colors">{h.title}</div>
+                    <div className="text-gray-500 text-xs group-hover:text-gray-400 transition-colors">{h.desc}</div>
                   </motion.div>
                 );
               })}
@@ -93,7 +94,7 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
-            className="glass-effect p-8 rounded-2xl border border-white/10"
+            className="glass-effect-enhanced p-8 rounded-2xl border border-orange-500/20 hover-lift"
           >
             <h3 className="text-white font-bold text-lg mb-8">Technical Proficiency</h3>
             <div className="space-y-6">

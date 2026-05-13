@@ -47,11 +47,15 @@ export default function Navbar() {
           transition={{ duration: 0.5 }}
           className="text-xl font-bold flex items-center gap-2.5 group"
         >
-          <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center glow-orange group-hover:scale-110 transition-transform">
-            <span className="text-white font-extrabold text-sm">V</span>
+          <div className="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-orange-500/20">
+            <img 
+              src="/vetrix.png" 
+              alt="Vetrix Studio Logo" 
+              className="w-full h-full object-cover"
+            />
           </div>
-          <span className="bg-gradient-to-r from-orange-400 to-orange-500 bg-clip-text text-transparent font-extrabold tracking-tight">
-            Veltrix Studio
+          <span className="bg-gradient-to-r from-orange-400 to-orange-500 bg-clip-text text-transparent font-extrabold tracking-tight hidden sm:inline">
+            Vetrix Studio
           </span>
         </motion.a>
 

@@ -48,7 +48,8 @@ export default function Services() {
       id="services"
       className="min-h-screen flex items-center py-24 relative overflow-hidden"
     >
-      <div className="absolute left-0 top-1/3 w-[400px] h-[400px] bg-orange-500/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute left-0 top-1/3 w-[400px] h-[400px] bg-gradient-to-br from-orange-500/10 to-orange-500/5 rounded-full blur-[100px] pointer-events-none animate-pulse-glow" />
+      <div className="absolute right-0 bottom-0 w-[300px] h-[300px] bg-orange-600/5 rounded-full blur-[80px] pointer-events-none animate-float" style={{ animationDelay: '3s' }} />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <motion.div
@@ -75,26 +76,26 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -8 }}
-                className="group relative glass-effect p-7 rounded-2xl border border-white/10 hover:border-orange-500/40 transition-all duration-300 overflow-hidden cursor-pointer"
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="group relative glass-effect-enhanced p-7 rounded-2xl border border-orange-500/20 hover:border-orange-500/60 transition-all duration-300 overflow-hidden cursor-pointer hover-lift"
               >
                 {/* Number watermark */}
-                <span className="absolute top-4 right-5 text-6xl font-black text-white/[0.03] select-none group-hover:text-orange-500/5 transition-colors">
+                <span className="absolute top-4 right-5 text-6xl font-black text-white/[0.03] select-none group-hover:text-orange-500/10 transition-colors duration-300">
                   {String(index + 1).padStart(2, '0')}
                 </span>
 
-                {/* Hover glow */}
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-orange-500/0 group-hover:from-orange-500/5 group-hover:to-transparent transition-all duration-500 rounded-2xl" />
+                {/* Hover glow background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-orange-500/0 group-hover:from-orange-500/10 group-hover:to-orange-500/5 transition-all duration-500 rounded-2xl" />
 
                 <div className="relative z-10">
-                  <div className="w-12 h-12 rounded-xl bg-orange-500/15 flex items-center justify-center mb-5 group-hover:bg-orange-500/25 group-hover:scale-110 transition-all duration-300">
-                    <Icon className="text-orange-400" size={22} />
+                  <div className="w-12 h-12 rounded-xl bg-orange-500/20 flex items-center justify-center mb-5 group-hover:bg-orange-500/30 group-hover:scale-110 transition-all duration-300 shadow-lg shadow-orange-500/10">
+                    <Icon className="text-orange-400 group-hover:text-orange-300 transition-colors" size={22} />
                   </div>
 
-                  <h3 className="text-white font-bold text-lg mb-3 group-hover:text-orange-100 transition-colors">
+                  <h3 className="text-white font-bold text-lg mb-3 group-hover:text-orange-100 transition-colors duration-300">
                     {service.title}
                   </h3>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-5">
+                  <p className="text-gray-500 text-sm leading-relaxed mb-5 group-hover:text-gray-400 transition-colors">
                     {service.description}
                   </p>
 
