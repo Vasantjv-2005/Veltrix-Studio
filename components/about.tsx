@@ -1,75 +1,127 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Code2, Layers, Rocket, Users } from 'lucide-react';
 
 export default function About() {
-  const skills = ['React', 'Next.js', 'TypeScript', 'Tailwind', 'Node.js', 'MongoDB'];
+  const skills = [
+    { name: 'React / Next.js', level: 95 },
+    { name: 'TypeScript', level: 90 },
+    { name: 'Node.js / Express', level: 88 },
+    { name: 'MongoDB / PostgreSQL', level: 82 },
+    { name: 'Tailwind CSS', level: 95 },
+    { name: 'UI/UX Design', level: 78 },
+  ];
+
+  const highlights = [
+    { icon: Code2, title: 'Clean Code', desc: 'Scalable, maintainable architecture' },
+    { icon: Layers, title: 'Full Stack', desc: 'End-to-end product delivery' },
+    { icon: Rocket, title: 'Fast Delivery', desc: 'Rapid iteration & deployment' },
+    { icon: Users, title: 'Mentorship', desc: '500+ developers guided' },
+  ];
 
   return (
     <section
       id="about"
-      className="min-h-screen flex items-center py-20 relative overflow-hidden"
+      className="min-h-screen flex items-center py-24 relative overflow-hidden"
     >
+      {/* Subtle bg accent */}
+      <div className="absolute right-0 top-1/4 w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        {/* Section label */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mb-12"
+          className="mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            About <span className="text-orange-500">Me</span>
+          <span className="text-orange-500 text-sm font-semibold tracking-widest uppercase mb-3 block">Who I Am</span>
+          <h2 className="text-4xl md:text-6xl font-extrabold text-white leading-tight">
+            Crafting Digital <br />
+            <span className="text-orange-500">Experiences</span> That Matter
           </h2>
-          <p className="text-gray-400 text-lg">Get to know the person behind the code</p>
         </motion.div>
 
-        <div className="space-y-12">
-          {/* Content */}
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
+          {/* Left — story + highlights */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.7 }}
             viewport={{ once: true }}
-            className="space-y-6"
+            className="space-y-8"
           >
-            <p className="text-gray-300 text-lg leading-relaxed">
-              I&apos;m passionate about building beautiful, functional digital experiences that solve real-world problems. With expertise in full-stack web development, I&apos;ve had the privilege of working with startups, enterprises, and students to transform ideas into reality.
-            </p>
+            <div className="space-y-5 text-gray-400 text-base leading-relaxed">
+              <p>
+                I&apos;m a full-stack developer passionate about building beautiful, functional digital experiences that solve real-world problems. With expertise across the entire stack, I&apos;ve worked with startups, enterprises, and students to transform ideas into reality.
+              </p>
+              <p>
+                My journey started with a simple passion for coding. Over time, I discovered my true calling: creating scalable solutions and mentoring the next generation of developers. Today, I combine development expertise with hands-on guidance to help others build remarkable digital products.
+              </p>
+            </div>
 
-            <p className="text-gray-300 text-lg leading-relaxed">
-              My journey started with a simple passion for coding. Over time, I discovered my true calling: creating scalable solutions and mentoring the next generation of developers. Today, I combine my development expertise with hands-on guidance to help others build remarkable digital products.
-            </p>
-
-            <p className="text-gray-300 text-lg leading-relaxed">
-              What drives me is building solutions that matter—whether it&apos;s crafting elegant interfaces, architecting robust backends, or mentoring developers to reach their full potential. Every project is an opportunity to push boundaries and create something exceptional.
-            </p>
+            {/* Highlight grid */}
+            <div className="grid grid-cols-2 gap-4">
+              {highlights.map((h, i) => {
+                const Icon = h.icon;
+                return (
+                  <motion.div
+                    key={h.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                    viewport={{ once: true }}
+                    whileHover={{ y: -4, borderColor: 'rgba(255,140,66,0.5)' }}
+                    className="glass-effect p-5 rounded-xl border border-white/10 transition-all duration-300 group"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-orange-500/15 flex items-center justify-center mb-3 group-hover:bg-orange-500/25 transition-colors">
+                      <Icon size={20} className="text-orange-400" />
+                    </div>
+                    <div className="text-white font-semibold text-sm mb-1">{h.title}</div>
+                    <div className="text-gray-500 text-xs">{h.desc}</div>
+                  </motion.div>
+                );
+              })}
+            </div>
           </motion.div>
 
-          {/* Tech Stack */}
+          {/* Right — skill bars */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7 }}
             viewport={{ once: true }}
-            className="glass-effect p-8 rounded-2xl border border-orange-500/20 hover:border-orange-500/40 transition-all duration-300"
+            className="glass-effect p-8 rounded-2xl border border-white/10"
           >
-            <div>
-              <h3 className="text-white font-bold mb-5 text-xl">Core Technologies</h3>
-              <div className="flex flex-wrap gap-3">
-                {skills.map((skill, index) => (
-                  <motion.span
-                    key={skill}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.4, delay: index * 0.05 }}
-                    viewport={{ once: true }}
-                    whileHover={{ scale: 1.12, boxShadow: '0 0 20px rgba(255, 140, 66, 0.5)', y: -2 }}
-                    className="px-4 py-2.5 rounded-lg bg-gradient-to-br from-orange-500/20 to-orange-500/10 border border-orange-500/40 text-orange-300 text-sm font-medium transition-all cursor-pointer"
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
+            <h3 className="text-white font-bold text-lg mb-8">Technical Proficiency</h3>
+            <div className="space-y-6">
+              {skills.map((skill, i) => (
+                <div key={skill.name}>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-gray-300 text-sm font-medium">{skill.name}</span>
+                    <span className="text-orange-400 text-sm font-bold">{skill.level}%</span>
+                  </div>
+                  <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${skill.level}%` }}
+                      transition={{ duration: 1, delay: i * 0.1, ease: 'easeOut' }}
+                      viewport={{ once: true }}
+                      className="h-full bg-gradient-to-r from-orange-500 to-orange-400 rounded-full"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Available badge */}
+            <div className="mt-8 flex items-center gap-3 p-4 rounded-xl bg-green-500/5 border border-green-500/20">
+              <div className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse flex-shrink-0" />
+              <div>
+                <div className="text-white text-sm font-semibold">Available for Projects</div>
+                <div className="text-gray-500 text-xs">Open to mentorship, consulting & new builds</div>
               </div>
             </div>
           </motion.div>

@@ -126,13 +126,13 @@
 
 @layer utilities {
   .glass-effect {
-    background: rgba(26, 24, 22, 0.7);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(232, 230, 225, 0.1);
+    background: rgba(15, 15, 15, 0.6);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
   }
 
   .glow-orange {
-    box-shadow: 0 0 20px rgba(255, 140, 66, 0.3);
+    box-shadow: 0 0 24px rgba(255, 140, 66, 0.35);
   }
 
   .gradient-orange {
@@ -143,29 +143,46 @@
     text-wrap: balance;
   }
 
+  .hero-grid-bg {
+    background-image:
+      linear-gradient(rgba(255, 140, 66, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 140, 66, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
   .animate-float {
-    animation: float 6s ease-in-out infinite;
+    animation: float 7s ease-in-out infinite;
   }
 
   .animate-glow {
     animation: glow 3s ease-in-out infinite;
   }
 
+  .animate-blink {
+    animation: blink 1s step-end infinite;
+  }
+
+  .floating-badge {
+    animation: floatBadge 4s ease-in-out infinite;
+  }
+
   @keyframes float {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-20px);
-    }
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-24px); }
   }
 
   @keyframes glow {
-    0%, 100% {
-      box-shadow: 0 0 20px rgba(255, 140, 66, 0.3);
-    }
-    50% {
-      box-shadow: 0 0 40px rgba(255, 140, 66, 0.6);
-    }
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 140, 66, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(255, 140, 66, 0.6); }
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  @keyframes floatBadge {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
   }
 }

@@ -8,120 +8,132 @@ export default function Services() {
     {
       icon: Code2,
       title: 'Full Stack Development',
-      description: 'End-to-end web application development with modern technologies and best practices',
+      description: 'End-to-end web application development with modern technologies, clean architecture, and best practices.',
+      tags: ['React', 'Next.js', 'Node.js'],
     },
     {
       icon: Zap,
       title: 'SaaS Web Applications',
-      description: 'Build scalable SaaS platforms with secure authentication and robust databases',
+      description: 'Build scalable SaaS platforms with secure authentication, subscription billing, and robust databases.',
+      tags: ['Auth', 'Stripe', 'MongoDB'],
     },
     {
       icon: Database,
       title: 'Backend Architecture',
-      description: 'Design and implement powerful backend systems for production applications',
+      description: 'Design and implement powerful backend systems, REST APIs, and microservices for production applications.',
+      tags: ['REST API', 'PostgreSQL', 'Redis'],
     },
     {
       icon: Palette,
       title: 'UI/UX Design',
-      description: 'Beautiful, user-centered designs that convert and create memorable experiences',
+      description: 'Beautiful, user-centered designs that convert visitors and create memorable, accessible experiences.',
+      tags: ['Figma', 'Tailwind', 'Framer'],
     },
     {
       icon: Globe,
       title: 'Web Performance',
-      description: 'Optimize applications for speed, reliability, and superior user experience',
+      description: 'Optimize applications for speed, Core Web Vitals, SEO, and superior user experience at scale.',
+      tags: ['Lighthouse', 'CDN', 'Caching'],
     },
     {
       icon: Users,
       title: 'Mentorship & Guidance',
-      description: 'Expert guidance to accelerate your development skills and career growth',
+      description: 'Expert 1-on-1 guidance to accelerate your development skills, career growth, and project delivery.',
+      tags: ['1-on-1', 'Code Review', 'Career'],
     },
   ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-    hover: {
-      y: -10,
-      transition: { duration: 0.3 },
-    },
-  };
 
   return (
     <section
       id="services"
-      className="min-h-screen flex items-center py-20 relative overflow-hidden"
+      className="min-h-screen flex items-center py-24 relative overflow-hidden"
     >
+      <div className="absolute left-0 top-1/3 w-[400px] h-[400px] bg-orange-500/5 rounded-full blur-[100px] pointer-events-none" />
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mb-12"
+          className="mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            My <span className="text-orange-500">Services</span>
+          <span className="text-orange-500 text-sm font-semibold tracking-widest uppercase mb-3 block">What I Do</span>
+          <h2 className="text-4xl md:text-6xl font-extrabold text-white leading-tight">
+            Services Built <br />
+            <span className="text-orange-500">For Results</span>
           </h2>
-          <p className="text-gray-400 text-lg">
-            Comprehensive solutions for all your web development needs
-          </p>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
               <motion.div
                 key={service.title}
-                variants={cardVariants}
-                whileHover="hover"
-                className="glass-effect p-6 rounded-2xl border border-orange-500/20 hover:border-orange-500/50 transition-all duration-300 group cursor-pointer"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -8 }}
+                className="group relative glass-effect p-7 rounded-2xl border border-white/10 hover:border-orange-500/40 transition-all duration-300 overflow-hidden cursor-pointer"
               >
-                <motion.div
-                  whileHover={{ scale: 1.1, rotate: 10 }}
-                  transition={{ type: 'spring', stiffness: 400 }}
-                  className="w-12 h-12 rounded-lg bg-orange-500/20 flex items-center justify-center mb-4 group-hover:bg-orange-500/30 transition-colors"
-                >
-                  <Icon className="text-orange-500" size={24} />
-                </motion.div>
+                {/* Number watermark */}
+                <span className="absolute top-4 right-5 text-6xl font-black text-white/[0.03] select-none group-hover:text-orange-500/5 transition-colors">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
 
-                <h3 className="text-lg font-semibold text-white mb-2">
-                  {service.title}
-                </h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  {service.description}
-                </p>
+                {/* Hover glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/0 to-orange-500/0 group-hover:from-orange-500/5 group-hover:to-transparent transition-all duration-500 rounded-2xl" />
 
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileHover={{ width: '100%' }}
-                  transition={{ duration: 0.3 }}
-                  className="h-0.5 bg-orange-500 mt-4 rounded-full"
-                ></motion.div>
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-xl bg-orange-500/15 flex items-center justify-center mb-5 group-hover:bg-orange-500/25 group-hover:scale-110 transition-all duration-300">
+                    <Icon className="text-orange-400" size={22} />
+                  </div>
+
+                  <h3 className="text-white font-bold text-lg mb-3 group-hover:text-orange-100 transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-500 text-sm leading-relaxed mb-5">
+                    {service.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {service.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-400 text-xs font-medium group-hover:border-orange-500/20 group-hover:text-orange-300/70 transition-colors"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </motion.div>
             );
           })}
+        </div>
+
+        {/* CTA strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="mt-12 glass-effect rounded-2xl border border-orange-500/20 p-8 flex flex-col md:flex-row items-center justify-between gap-6"
+        >
+          <div>
+            <h3 className="text-white font-bold text-xl mb-1">Ready to build something great?</h3>
+            <p className="text-gray-500 text-sm">Let&apos;s discuss your project and bring your vision to life.</p>
+          </div>
+          <motion.a
+            href="#contact"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="flex-shrink-0 px-7 py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full transition-colors glow-orange text-sm"
+          >
+            Get In Touch
+          </motion.a>
         </motion.div>
       </div>
     </section>

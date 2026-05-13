@@ -1,118 +1,184 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { ArrowRight, Sparkles, Code2, Zap } from 'lucide-react';
+
+const WORDS = ['Vision', 'Ideas', 'Dreams', 'Goals'];
 
 export default function Hero() {
-  const ref = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const blobRef = useRef<HTMLDivElement>(null);
+  const [wordIndex, setWordIndex] = useState(0);
+  const [displayed, setDisplayed] = useState('');
+  const [deleting, setDeleting] = useState(false);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: 'easeOut' },
-    },
-  };
-
+  // Typewriter effect
   useEffect(() => {
-    if (!ref.current) return;
+    const word = WORDS[wordIndex];
+    let timeout: ReturnType<typeof setTimeout>;
 
+    if (!deleting && displayed.length < word.length) {
+      timeout = setTimeout(() => setDisplayed(word.slice(0, displayed.length + 1)), 90);
+    } else if (!deleting && displayed.length === word.length) {
+      timeout = setTimeout(() => setDeleting(true), 1800);
+    } else if (deleting && displayed.length > 0) {
+      timeout = setTimeout(() => setDisplayed(displayed.slice(0, -1)), 50);
+    } else if (deleting && displayed.length === 0) {
+      setDeleting(false);
+      setWordIndex((i) => (i + 1) % WORDS.length);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [displayed, deleting, wordIndex]);
+
+  // Parallax blob on mouse move
+  useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (!ref.current) return;
-      const x = (e.clientX / window.innerWidth - 0.5) * 20;
-      const y = (e.clientY / window.innerHeight - 0.5) * 20;
-      ref.current.style.transform = `translate(${x}px, ${y}px)`;
+      if (!blobRef.current) return;
+      const x = (e.clientX / window.innerWidth - 0.5) * 30;
+      const y = (e.clientY / window.innerHeight - 0.5) * 30;
+      blobRef.current.style.transform = `translate(${x}px, ${y}px)`;
     };
-
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
+  };
+
+  const stats = [
+    { value: '50+', label: 'Projects Delivered' },
+    { value: '500+', label: 'Students Mentored' },
+    { value: '3+', label: 'Years Experience' },
+    { value: '4.9★', label: 'Average Rating' },
+  ];
+
   return (
     <section
       id="home"
+      ref={containerRef}
       className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20"
     >
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 z-0">
+      {/* Grid background */}
+      <div className="absolute inset-0 hero-grid-bg opacity-30 z-0" />
+
+      {/* Animated blobs */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <div
-          ref={ref}
-          className="absolute top-20 left-10 w-72 h-72 bg-orange-500/20 rounded-full blur-3xl animate-float"
-        ></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-orange-500/5 rounded-full blur-3xl"></div>
+          ref={blobRef}
+          className="absolute top-16 left-8 w-80 h-80 bg-orange-500/25 rounded-full blur-[80px] transition-transform duration-700 ease-out"
+        />
+        <div className="absolute bottom-24 right-8 w-[28rem] h-[28rem] bg-orange-600/15 rounded-full blur-[100px] animate-float" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] bg-orange-500/5 rounded-full blur-[120px]" />
       </div>
+
+      {/* Floating badges */}
+      <motion.div
+        initial={{ opacity: 0, x: -40, y: 20 }}
+        animate={{ opacity: 1, x: 0, y: 0 }}
+        transition={{ delay: 1.2, duration: 0.8 }}
+        className="absolute left-6 top-1/3 hidden xl:flex items-center gap-2 glass-effect px-4 py-2.5 rounded-xl border border-orange-500/30 text-sm text-orange-300 floating-badge"
+      >
+        <Code2 size={16} className="text-orange-400" />
+        Full Stack Dev
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, x: 40, y: 20 }}
+        animate={{ opacity: 1, x: 0, y: 0 }}
+        transition={{ delay: 1.4, duration: 0.8 }}
+        className="absolute right-6 top-1/3 hidden xl:flex items-center gap-2 glass-effect px-4 py-2.5 rounded-xl border border-orange-500/30 text-sm text-orange-300 floating-badge"
+        style={{ animationDelay: '1s' }}
+      >
+        <Zap size={16} className="text-orange-400" />
+        SaaS Builder
+      </motion.div>
 
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 max-w-4xl mx-auto px-4 text-center"
+        className="relative z-10 max-w-5xl mx-auto px-4 text-center"
       >
-        <motion.div variants={itemVariants} className="mb-8">
-          <span className="inline-block px-6 py-2.5 rounded-full bg-orange-500/10 border border-orange-500/40 text-orange-400 text-sm font-semibold tracking-wide">
-            Veltrix Studio - Web Development Excellence
+        {/* Badge */}
+        <motion.div variants={itemVariants} className="mb-8 flex justify-center">
+          <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-orange-500/10 border border-orange-500/40 text-orange-400 text-sm font-semibold tracking-wide">
+            <Sparkles size={14} className="animate-pulse" />
+            Veltrix Studio — Web Development Excellence
           </span>
         </motion.div>
 
+        {/* Headline */}
         <motion.h1
           variants={itemVariants}
-          className="text-6xl md:text-8xl font-bold text-white mb-8 text-balance leading-tight"
+          className="text-5xl sm:text-7xl md:text-8xl font-extrabold text-white mb-6 leading-[1.05] tracking-tight"
         >
-          Premium Web Solutions <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">For Your Vision</span>
+          Turning Your{' '}
+          <span className="relative inline-block">
+            <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent">
+              {displayed}
+              <span className="animate-blink text-orange-400">|</span>
+            </span>
+          </span>
+          <br />
+          Into Reality
         </motion.h1>
 
+        {/* Sub */}
         <motion.p
           variants={itemVariants}
-          className="text-lg md:text-xl text-gray-300 mb-10 max-w-3xl mx-auto text-balance leading-relaxed"
+          className="text-base md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed"
         >
-          Crafting stunning full-stack applications, scalable SaaS platforms, and mentoring the next generation of developers. Let&apos;s build something extraordinary together.
+          Crafting stunning full-stack applications, scalable SaaS platforms, and mentoring the next generation of developers.
         </motion.p>
 
-        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center gap-4 items-center">
+        {/* CTAs */}
+        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center gap-4 items-center mb-20">
           <motion.a
             href="https://cal.com/vasant-jevengekar-qnghw4/web-development-class"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(255, 140, 66, 0.5)' }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-full hover:from-orange-600 hover:to-orange-700 transition-all duration-300 flex items-center gap-2 glow-orange"
+            whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(255, 140, 66, 0.6)' }}
+            whileTap={{ scale: 0.97 }}
+            className="group px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-full transition-all duration-300 flex items-center gap-2 glow-orange text-sm md:text-base"
           >
             Start Your Project
-            <span className="text-lg">→</span>
+            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </motion.a>
           <motion.a
             href="#projects"
-            whileHover={{ scale: 1.05, borderColor: 'rgb(255, 140, 66)' }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-transparent border-2 border-orange-500/50 text-orange-400 font-bold rounded-full hover:border-orange-500 hover:bg-orange-500/10 transition-all duration-300"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            className="px-8 py-4 bg-transparent border-2 border-white/20 text-white font-bold rounded-full hover:border-orange-500/60 hover:bg-orange-500/10 transition-all duration-300 text-sm md:text-base"
           >
             View My Work
           </motion.a>
         </motion.div>
 
-        {/* Scroll Indicator */}
+        {/* Stats bar */}
         <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          variants={itemVariants}
+          className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/10"
         >
-          <div className="text-gray-400 text-sm">Scroll to explore</div>
-          <div className="flex justify-center gap-1">
-            <div className="w-0.5 h-4 bg-orange-500/50 rounded-full"></div>
-          </div>
+          {stats.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1 + i * 0.1, duration: 0.5 }}
+              className="bg-black/40 backdrop-blur-sm px-6 py-5 text-center hover:bg-orange-500/10 transition-colors duration-300"
+            >
+              <div className="text-2xl md:text-3xl font-bold text-orange-400 mb-1">{stat.value}</div>
+              <div className="text-xs text-gray-500 uppercase tracking-wider">{stat.label}</div>
+            </motion.div>
+          ))}
         </motion.div>
       </motion.div>
     </section>
