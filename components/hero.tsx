@@ -194,24 +194,6 @@ export default function Hero() {
           </motion.a>
         </motion.div>
 
-        {/* Stats bar */}
-        <motion.div
-          variants={itemVariants}
-          className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/10"
-        >
-          {stats.map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1 + i * 0.1, duration: 0.5 }}
-              className="bg-black/40 backdrop-blur-sm px-6 py-5 text-center hover:bg-orange-500/10 transition-colors duration-300"
-            >
-              <div className="text-2xl md:text-3xl font-bold text-orange-400 mb-1">{stat.value}</div>
-              <div className="text-xs text-gray-500 uppercase tracking-wider">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
       </motion.div>
     </section>
   );
